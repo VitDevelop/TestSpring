@@ -66,7 +66,7 @@ public class Controller {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file){
         String filename = file.getOriginalFilename();
-        String directory = "D:\\Vitaly\\@Spring\\upload_files";
+        String directory = "/media/Vitaly/Lucru/@Spring/upload_files";
         String filepath = Paths.get(directory,filename).toString();
         try {
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
@@ -84,7 +84,6 @@ public class Controller {
                 list.add(listOfFiles[i].getName());
             }
         }
-
         return new ResponseEntity<ArrayList<String>>(list,HttpStatus.OK);
 
 
