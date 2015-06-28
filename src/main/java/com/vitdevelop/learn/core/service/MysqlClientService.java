@@ -1,10 +1,9 @@
 package com.vitdevelop.learn.core.service;
 
 import com.vitdevelop.learn.core.domain.Client;
-import com.vitdevelop.learn.core.repository.ClientRepository;
+import com.vitdevelop.learn.core.repository.MysqlClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,9 +11,9 @@ import java.util.List;
  * Created by vitaly on 6/28/15.
  */
 @Service
-public class ClientServiceImpl implements ClientService {
+public class MysqlClientService implements ClientService {
     @Autowired
-    private ClientRepository clientRepository;
+    private MysqlClientRepository clientRepository;
 
     @Override
     public Long countByLastName(String lastname){

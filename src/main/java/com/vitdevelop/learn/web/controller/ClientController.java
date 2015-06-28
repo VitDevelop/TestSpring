@@ -1,8 +1,7 @@
 package com.vitdevelop.learn.web.controller;
 
 import com.vitdevelop.learn.core.domain.Client;
-import com.vitdevelop.learn.core.service.ClientService;
-import com.vitdevelop.learn.core.service.ClientServiceImpl;
+import com.vitdevelop.learn.core.service.MysqlClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v0.0.1/client")
 public class ClientController {
     @Autowired
-    private ClientServiceImpl clientService;
+    private MysqlClientService clientService;
 
     @RequestMapping
     public List<Client> getAll(){
