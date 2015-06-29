@@ -3,10 +3,11 @@ package com.vitdevelop.learn.web.controller;
 import com.vitdevelop.learn.core.domain.Client;
 import com.vitdevelop.learn.core.service.MysqlClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,8 +41,12 @@ public class ClientController {
         return clientService.removeByLastName(lastName);
     }
     @RequestMapping(value = "/find/{lastName}",method = RequestMethod.GET)
-    public List<Client> findByLastName(@PathVariable("lastName")String lastName){
-        return clientService.findByLastName(lastName);
+    public Page<Client> findByLastName(@PathVariable("lastName")String lastName,
+                                       @RequestParam("page") int page,
+                                       @RequestParam("size") int size,
+                                       @RequestParam("sort") Sort.Direction direction,
+                                       @RequestParam("sortField") String sortfield){
+        return clientService.findByLastName(lastName, new PageRequest(page,size,direction,sortfield));
     }
 
 }

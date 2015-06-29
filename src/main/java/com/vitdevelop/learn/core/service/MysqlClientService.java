@@ -3,6 +3,8 @@ package com.vitdevelop.learn.core.service;
 import com.vitdevelop.learn.core.domain.Client;
 import com.vitdevelop.learn.core.repository.MysqlClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +39,9 @@ public class MysqlClientService implements ClientService {
     public List<Client> removeByLastName(String lastname){
         return clientRepository.removeByLastName(lastname);
     }
-    public List<Client> findByLastName(String lastname){
-        return clientRepository.findByLastName(lastname);
+    @Override
+    public Page<Client> findByLastName(String lastname, Pageable pageable){
+        return clientRepository.findByLastName(lastname, pageable);
     }
+
 }

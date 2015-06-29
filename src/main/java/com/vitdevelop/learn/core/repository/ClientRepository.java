@@ -1,6 +1,8 @@
 package com.vitdevelop.learn.core.repository;
 
 import com.vitdevelop.learn.core.domain.Client;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,5 +14,6 @@ public interface ClientRepository extends JpaRepository<Client,Long>{
     Long countByLastName(String lastname);
     Long deleteByLastName(String lastname);
     List<Client> removeByLastName(String lastname);
-    List<Client> findByLastName(String lastname);
+//    List<Client> findByLastName(String lastname);
+    Page<Client> findByLastName(String lastname, Pageable pageable);
 }
