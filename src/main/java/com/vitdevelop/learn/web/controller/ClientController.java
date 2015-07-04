@@ -1,12 +1,12 @@
 package com.vitdevelop.learn.web.controller;
 
 import com.vitdevelop.learn.core.domain.Client;
-import com.vitdevelop.learn.core.service.MysqlClientService;
+import com.vitdevelop.learn.core.service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v0.0.1/client")
 public class ClientController {
     @Autowired
-    private MysqlClientService clientService;
+    private ClientServiceImpl clientService;
 
     @RequestMapping
     public List<Client> getAll(){
@@ -36,6 +36,7 @@ public class ClientController {
     public void delete(@PathVariable("id")Long id){
         clientService.delete(id);
     }
+    @Transactional
     @RequestMapping(value = "/remove/{lastName}",method = RequestMethod.DELETE)
     public List<Client> removeByLastName(@PathVariable("lastName")String lastName){
         return clientService.removeByLastName(lastName);
@@ -46,7 +47,12 @@ public class ClientController {
                                        @RequestParam("size") int size,
                                        @RequestParam("sort") Sort.Direction direction,
                                        @RequestParam("sortField") String sortfield){
-        return clientService.findByLastName(lastName, new PageRequest(page,size,direction,sortfield));
+        return clientService.findByLastName(lastName, new PageRequest(page, size, direction, sortfield));
+    }
+
+    @RequestMapping(value = "/findFirst")
+    public Client findFirst(){
+        return clientService.findFirst();
     }
 
 }
