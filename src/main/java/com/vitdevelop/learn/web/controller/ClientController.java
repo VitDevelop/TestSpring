@@ -29,7 +29,7 @@ public class ClientController {
        return clientService.countByLastName(lastName);
     }
     @RequestMapping(value = "/delete/{lastName}",method = RequestMethod.DELETE)
-    public Long deleteByLastName(@PathVariable("lastName")String lastName){
+    public int deleteByLastName(@PathVariable("lastName")String lastName){
         return clientService.deleteByLastName(lastName);
     }
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
@@ -53,6 +53,17 @@ public class ClientController {
     @RequestMapping(value = "/findFirst")
     public Client findFirst(){
         return clientService.findFirst();
+    }
+
+    @RequestMapping(value = "/findByLastName/{lastname}")
+    public List<Client> findByLastName(@PathVariable String lastname){
+        return clientService.findByLastName(lastname);
+    }
+
+    @RequestMapping(value = "/findByFirstNameOrLastName/{firstname},{lastname}")
+    public List<Client> findByFirstNameOrLastName(@PathVariable String firstname,
+                                                  @PathVariable String lastname){
+        return clientService.findByFirstNameOrLastName(firstname,lastname);
     }
 
 }
